@@ -1,7 +1,7 @@
 #
-#   cmake file to compile the interface between the CERN simulation framework
-#   geant4, its wrapper class xcsit and the XCSITDetectorSimulation class of the
-#   SimEx framework.
+#   cmake file to compile the interface between the simulation toolkit 
+#   Geant4 (http://geant4.org), its wrapper class xcsit and the 
+#   XCSITDetectorSimulation class of the SimEx framework.
 #
 #	File:	./CMakeLists.txt
 #	Author:	jburchert
