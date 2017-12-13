@@ -69,9 +69,9 @@ option(BOOST_ROOT "-DBOOST_ROOT=<abs path> absolute path to the boost
     ./include/boost/
     ./lib/"
 )
-option(DEBUG "-DDEBUG sets all the necessary flages to compile with 
-    additional output"
-)
+option(PYDETINT_DEBUG "Sets all the necessary flages to compile \
+with additional output" 
+        OFF)
 
 
 # Check if there is user input
@@ -87,8 +87,8 @@ endif()
 if(NOT BOOST_ROOT)
     message(FATAL_ERROR "Path to boost install root has to be specified")
 endif()
-if(NOT DEBUG)
-    set(DEBUG OFF)
+if(NOT PYDETINT_DEBUG)
+    set(PYDETINT_DEBUG OFF)
     message(STATUS "Compilation type: release mode")
 else()
     message(STATUS "Compilation type: debug mode")

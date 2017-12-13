@@ -70,7 +70,7 @@ if(UNIX)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wl,--unresolved-symbols=report-all -Wl,--warn-unresolved-symbols")
 
     # Set additional flages for debugging if required
-    if(${DEBUG})
+    if(${PYDETINT_DEBUG})
         SET(CMAKE_CXX_FLAGS "-g -DDEBUGMODE=1 ${CMAKE_CXX_FLAGS}")
     endif()    
 endif()
