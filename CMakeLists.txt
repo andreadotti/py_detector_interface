@@ -44,19 +44,13 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     endif()
 endif()
 
-# Specify options
-option(GEANT4_ROOT "-DGEANT4_ROOT=<abs path> absolute path to the geant4
-    installation directory that includes \n
-    ./bin/\n
-    ./include/Geant4/\n
-    ./lib64/Geant4-<ver>/\n
-    ./share/Geant4-<ver>/data/"
-)
-option(XERCESC_ROOT "-DXERCESC_ROOT=<abs path> absolute path to the xercesc
-    installation directory that includes\n
-    ./include/xercesc/\n
-    ./lib/"
-)
+#These will exit with an appropriate message in case of errors
+#Are these really needed, considering that these are requested again when
+#including src sub-directory
+find_package(Geant4 10.3 REQUIRED gdml)
+find_package(XercesC REQUIRED)
+find_package(Boost 1.54 REQUIRED)
+
 option(XCSIT_ROOT "-DXCSIT_ROOT=<abs path> absolute path to the xcist 
     installation directory that includes\n
     ./include/xcsit/
@@ -64,28 +58,14 @@ option(XCSIT_ROOT "-DXCSIT_ROOT=<abs path> absolute path to the xcist
     ./lib/xcsit/
     ./bin/"
 )
-option(BOOST_ROOT "-DBOOST_ROOT=<abs path> absolute path to the boost
-    installation directory that includes\n
-    ./include/boost/
-    ./lib/"
-)
 option(PYDETINT_DEBUG "Sets all the necessary flages to compile \
 with additional output" 
         OFF)
 
 
 # Check if there is user input
-if(NOT GEANT4_ROOT)
-    message(FATAL_ERROR "Path to geant4 install root has to be specified")
-endif()
-if(NOT XERCESC_ROOT)
-    message(FATAL_ERROR "Path to xercesc install root has to be specified")
-endif()
 if(NOT XCSIT_ROOT)
     message(FATAL_ERROR "Path to xcsit install root has to be specified")
-endif()
-if(NOT BOOST_ROOT)
-    message(FATAL_ERROR "Path to boost install root has to be specified")
 endif()
 if(NOT PYDETINT_DEBUG)
     set(PYDETINT_DEBUG OFF)

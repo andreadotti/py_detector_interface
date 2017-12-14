@@ -13,9 +13,7 @@ message(STATUS "Found boost includes at:    ${Boost_INCLUDE_DIRS}")
 include_directories(${Boost_INCLUDE_DIRS})
 
 # find the Geant4 package
-find_package(Geant4 REQUIRED
-    HINTS ${GEANT4_ROOT}/lib64/Geant4-10.3.1/Geant4Config.cmake
-)
+find_package(Geant4 REQUIRED)
 message(STATUS "Found Geant4 includes at:      ${Geant4_INCLUDE_DIR}")
 include_directories(
     ${Geant4_INCLUDE_DIR} 
@@ -34,24 +32,11 @@ find_package(xcsit REQUIRED
 message(STATUS "Found xcsit includes at:    ${xcsit_INCLUDE_DIRS}")
 include_directories(${xcsit_INCLUDE_DIRS})
 
-
+#TODO: Is this needed, once we require G4 to support GDML?
+#I think not
 # xercesc library
-add_library(xercesc SHARED IMPORTED)
-set_target_properties(xercesc PROPERTIES
-    IMPORTED_LOCATION ${XERCESC_ROOT}/lib/libxerces-c.so
-)
-include_directories(
-    ${XERCESC_ROOT}/include
- #   ${XERCESC_ROOT}/include/xercesc/dom 
- #   ${XERCESC_ROOT}/include/xercesc/framework
- #   ${XERCESC_ROOT}/include/xercesc/internal
- #   ${XERCESC_ROOT}/include/xercesc/parsers
- #   ${XERCESC_ROOT}/include/xercesc/sax
- #   ${XERCESC_ROOT}/include/xercesc/sax2
- #   ${XERCESC_ROOT}/include/xercesc/util
- #   ${XERCESC_ROOT}/include/xercesc/validators
-  #  ${XERCESC_ROOT}/include/xercesc/xinclude
-)
+find_package(XercesC REQUIRED)
+include_directories(${XercesC_INCLUDE_DIRS})
 
 # include of this project
 include_directories(${CMAKE_SOURCE_DIR}/include/)
@@ -105,7 +90,7 @@ add_library(py_detector_interface SHARED
 target_link_libraries(py_detector_interface 
     ${PYTHON_LIBRARIES}
     ${Boost_LIBRARIES}
-    xercesc
+    ${XercesC_LIBRRIES}
     ${xcsit_LIBRARIES}
     ${Geant4_LIBRARIES}
 )
